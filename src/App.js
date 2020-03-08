@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from "react";
+import styled, {createGlobalStyle, css, keyframes, ThemeProvider} from "styled-components";
+import theme from "./theme";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Card = styled.div `
+  background-color: red;
+`;
+
+const Button = styled.button `
+  border-radius: 30px;
+  padding: 25px 15px;
+  background-color: ${props => props.theme.successColor};
+`;
+
+const Container = styled.div `
+  height: 100vh;
+  width: 100%;
+  background-color: pink;
+  ${Card}{
+    background-color: blue;
+  }
+`;
+
+const GlobalStyle = createGlobalStyle `
+body {
+  padding : 0;
+  margin : 0;
 }
+`;
+
+class App extends Component {
+    render() {
+        return (
+            <React.Fragment>
+                <GlobalStyle/>
+                <ThemeProvider theme={theme}>
+                    <Container>
+                        <Form/>
+                    </Container>
+                </ThemeProvider>
+            </React.Fragment>
+        );
+    }
+}
+
+const Form = () => (
+    <Card>
+        <Button>Hello</Button>
+    </Card>
+);
 
 export default App;
